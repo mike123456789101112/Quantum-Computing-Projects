@@ -1,0 +1,40 @@
+include "qelib1.inc"
+
+// quantum register with 2 qubits. register = collection of qubits. initialized as |0|>
+qreg q[2];
+// classical register with 2 bits. stores classical bits. after measuring qubits, they are stored in classical register
+creg c[2];
+
+// now, basically we initialized an object and we can access first qubit in register q[0] etc
+// store measured qubit in classical register
+// so quantum registras are objects of a set of qubits that can be operated on each other
+
+measure q[0] -> c[0];
+measure q[1] -> c[1];
+
+// hadamard gate
+h q[0];
+
+// CNOT     first = control
+cx q[0], q[1];
+
+// other gates
+s, t ... rx(angle), ry(angle), rz(angle -rad), crx(angle) control, target;
+
+// subroutine
+
+// define subroutine (resuable sequence of opperations)
+cate my_gate q1, q2 {
+h q1;
+cx q1, q2;                // q is like a parameter
+
+// use subroutine
+my_gate q[0], q[1];
+
+// conditional
+
+if (c[0] == 1) {
+    x q[1]; // Apply X gate to q[1] if c[0] is 1
+}
+
+
